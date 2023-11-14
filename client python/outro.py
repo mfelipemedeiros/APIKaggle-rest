@@ -2,7 +2,7 @@
 import requests
 import json
 def get_something():
-    token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwaXp6dXJnLWFwaSIsImlhdCI6MTY5OTU4NDU0NiwiZXhwIjoxNjk5NTk4OTQ2LCJzdWIiOiJ0ZXN0ZUBlbWFpbC5jb20ifQ.5EAFe_cvGtgT9f3wzLRj14F1Q5u8O44YQqnw-Qi2ejE"
+    token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwaXp6dXJnLWFwaSIsImlhdCI6MTY5OTgzODcwOSwiZXhwIjoxNjk5ODUzMTA5LCJzdWIiOiJ0ZXN0ZUBlbWFpbC5jb20ifQ.ZNfywG46J6iX3b5I8mob_fnQxXiH0lYmTojkCthT6Tk"
     headers = {'Authorization': f'Bearer {token}'}
     request = requests.get("http://localhost:8080/api/kaggle/v1/products", headers=headers)
     print("get something: ")

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.aps.APIKaggle.dtos.productRecordDto;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,9 +44,9 @@ public class ProductController {
         if(shoes.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto Não encontrado");
         }
-
-        var shoesNew = shoes.get();
-        return  ResponseEntity.status(HttpStatus.OK).body(productRepository.save(shoesNew));
+        var productModel = shoes.get();
+        BeanUtils.copyProperties(product, productModel);
+        return  ResponseEntity.status(HttpStatus.OK).body(productRepository.save(productModel));
     }
     @PatchMapping("/products/alter/{id}")
     public ResponseEntity<Object> change(@PathVariable(value = "id") Long id, @RequestBody ProductModel product){
@@ -54,8 +54,9 @@ public class ProductController {
         if(shoes.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto Não encontrado");
         }
-        var shoesNew = shoes.get();
-        return  ResponseEntity.status(HttpStatus.OK).body(productRepository.save(shoesNew));
+        var productModel = shoes.get();
+        BeanUtils.copyProperties(product, productModel);
+        return  ResponseEntity.status(HttpStatus.OK).body(productRepository.save(productModel));
     }
     @DeleteMapping("/products/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable(value = "id") Long id){

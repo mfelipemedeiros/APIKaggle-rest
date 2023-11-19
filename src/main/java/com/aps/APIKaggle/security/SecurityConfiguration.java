@@ -22,7 +22,8 @@ public class SecurityConfiguration {
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
             "/api/kaggle/v1/users/login", // Url que usaremos para fazer login
-            "/api/kaggle/v1/users" // Url que usaremos para criar um usuário
+            "/api/kaggle/v1/users/create", // Url que usaremos para criar um usuário
+            "/api/kaggle/v1/products"
     };
 
     // Endpoints que requerem autenticação para serem acessados
@@ -36,20 +37,24 @@ public class SecurityConfiguration {
             "/api/kaggle/v1/",
             "/api/kaggle/v1/products/add",
             "/api/kaggle/v1/get/{id}",
-            "/api/kaggle/v1/products/alter/{id}",
-            "/api/kaggle/v1/products"
+            "/api/kaggle/v1/products/alter/{id}"
+
 
     };
 
     // Endpoints que só podem ser acessador por usuários com permissão de administrador
     public static final String [] ENDPOINTS_ADMIN = {
+            "/api/kaggle/v1/",
+            "/api/kaggle/v1/products/add",
+            "/api/kaggle/v1/get/{id}",
+            "/api/kaggle/v1/products/alter/{id}",
             "/api/kaggle/v1/products/delete/{id}",
             "/api/kaggle/v1/products/alterFull/{id}"
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf().disable() // Desativa a proteção contra CSRF
+        return httpSecurity.csrf().disable().cors().disable() // Desativa a proteção contra CSRF
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Configura a política de criação de sessão como stateless
                 .and().authorizeHttpRequests() // Habilita a autorização para as requisições HTTP
                 .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()

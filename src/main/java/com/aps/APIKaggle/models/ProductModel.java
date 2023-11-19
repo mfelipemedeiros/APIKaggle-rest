@@ -11,7 +11,10 @@ import java.util.Objects;
 public class ProductModel extends RepresentationModel<ProductModel> implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @TableGenerator(name = "sua_entidade_gen", table = "id_generator",
+            pkColumnName = "gen_name", valueColumnName = "gen_value",
+            initialValue = 3269, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "sua_entidade_gen")
     @Column(name = "id")
     private Long id;
     @Column(name = "product_name", length = 200)
